@@ -41,12 +41,12 @@ def draw_grid():
     screen.blit(hi_hat_text, (52, 434))
     screen.blit(crash_text, (52, 534))
 
-    for i in range(instruments):
-        pygame.draw.line(screen, gray, (0, (i * 100) + 100), (198, (i * 100) + 100), 2)
+    for inst in range(instruments):
+        pygame.draw.line(screen, gray, (0, (inst * 100) + 100), (198, (inst * 100) + 100), 2)
 
-    for i in range(beats):
-        for j in range(instruments):
-            rect = pygame.draw.rect(screen, gray, [i * ((WIDTH - 198) // beats) + 198, (j * 100),
+    for beat in range(beats):
+        for inst in range(instruments):
+            rect = pygame.draw.rect(screen, gray, [beat * ((WIDTH - 198) // beats) + 198, ((inst * 100) + 1),
                                      ((WIDTH - 198) // beats), ((HEIGHT - 198) // instruments)], 1, 2)
 
 run = True
