@@ -23,11 +23,18 @@ pygame seems like it has alot of functionality to offer, wish me luck!
 - created draw grid function to update display
 - added 2 divisions, one for instrument text, and one to house the lower menu
 - added text to the screen
+
 - added beats and instruments variable to build upon in future
 - used beats and instruments variables to aid in building correct number of pads vertically and horizontally
 - added grid to spacially define non functional pads
+
 - added mouse button down event to allow users to select the pads
 - styled the pads to change colors when clicked
+
+- created variables to build playing logic to determine beat sub-divisions and beat length based on FPS
+- created variable to determine the active beat
+- built a visual that highlights and moves along the active beat
+- passed variables to the draw grid function
 
 
 ## Created By:

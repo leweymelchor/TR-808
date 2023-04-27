@@ -11,6 +11,7 @@ white =(255, 255, 255)
 gray =(128, 128, 128)
 green = (0, 255, 0)
 gold = (212, 175, 55)
+blue = (0, 255, 255)
 
 screen = pygame.display.set_mode([WIDTH, HEIGHT])
 pygame.display.set_caption('TR-808')
@@ -22,11 +23,16 @@ beats = 8
 instruments = 6
 pads = []
 clicked = [[-1 for _ in range(beats)] for _ in range(instruments)]
+bpm = 240
+playing = True
+active_length = 0
+active_beat = 0
+beat_changed = True
 
 # for i in range(instruments):
 #     spacing = (i * 100) + 34
 
-def draw_grid(clicks):
+def draw_grid(clicks, active_beat):
     left_menu = pygame.draw.rect(screen, gray, [0, 0, 200, HEIGHT - 198], 2)
     lower_menu = pygame.draw.rect(screen, gray, [0, HEIGHT - 200, WIDTH, 200], 2)
     pads = []
@@ -65,6 +71,8 @@ def draw_grid(clicks):
                                      ((WIDTH - 198) // beats), ((HEIGHT - 198) // instruments)], 1, 2)
 
             pads.append((rect, (beat, inst)))
+
+        active = pygame.draw.rect(screen, blue, [active_beat * ((WIDTH - 200)// beats) + 200, 0, ((WIDTH - 200)// beats), instruments * 100], 2, 3)
     return pads
 
 
@@ -72,7 +80,7 @@ run = True
 while run:
     TIMER.tick(FPS)
     screen.fill(black)
-    pads = draw_grid(clicked)
+    pads = draw_grid(clicked, active_beat)
 
 
     for event in pygame.event.get():
@@ -84,6 +92,20 @@ while run:
                 if pads[pad][0].collidepoint(event.pos):
                     coords = pads[pad][1]
                     clicked[coords[1]][coords[0]] *= -1
+
+    beat_length = (FPS * 60) // bpm
+
+    if playing:
+        if active_length < beat_length:
+            active_length += 1
+        else:
+            active_length = 0
+            if active_beat < beats - 1:
+                active_beat += 1
+                beat_changed = True
+            else:
+                active_beat = 0
+                beat_changed = True
 
     pygame.display.flip()
 
