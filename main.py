@@ -28,6 +28,33 @@ playing = True
 active_length = 0
 active_beat = 0
 beat_changed = True
+pygame.mixer.set_num_channels(instruments * 3)
+
+# sounds
+kick =mixer.Sound('media/TR-808 sounds/Kick.wav')
+sub =mixer.Sound('media/TR-808 sounds/808 Sub.wav')
+snare =mixer.Sound('media/TR-808 sounds/Snare 1.wav')
+clap =mixer.Sound('media/TR-808 sounds/Clap 1.wav')
+hi_hat =mixer.Sound('media/TR-808 sounds/Closed Hat 1.wav')
+crash =mixer.Sound('media/TR-808 sounds/Cymbal.wav')
+
+
+def play_notes():
+    for i in range(len(clicked)):
+        if clicked[i][active_beat] == 1:
+            if i == 0:
+                kick.play()
+            if i == 1:
+                sub.play()
+            if i == 2:
+                snare.play()
+            if i == 3:
+                clap.play()
+            if i == 4:
+                hi_hat.play()
+            if i == 5:
+                crash.play()
+
 
 # for i in range(instruments):
 #     spacing = (i * 100) + 34
@@ -72,7 +99,7 @@ def draw_grid(clicks, active_beat):
 
             pads.append((rect, (beat, inst)))
 
-        active = pygame.draw.rect(screen, blue, [1 * ((WIDTH - 200)// beats) + 198, 0, ((WIDTH - 200)// beats), instruments * 100], 2, 3)
+        active = pygame.draw.rect(screen, blue, [active_beat * ((WIDTH - 200)// beats) + 198, 0, ((WIDTH - 200)// beats), instruments * 100], 2, 3)
     return pads
 
 
@@ -81,7 +108,9 @@ while run:
     TIMER.tick(FPS)
     screen.fill(black)
     pads = draw_grid(clicked, active_beat)
-
+    if beat_changed:
+        play_notes()
+        beat_changed = False
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

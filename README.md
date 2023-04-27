@@ -36,6 +36,10 @@ pygame seems like it has alot of functionality to offer, wish me luck!
 - built a visual that highlights and moves along the active beat
 - passed variables to the draw grid function
 
+- added TR-808 authentic sounds
+- added play notes function
+- passed play notes function to run while loop
+
 
 ## Created By:
 |Name|Email|GitHub|
