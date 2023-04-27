@@ -26,6 +26,8 @@ pygame seems like it has alot of functionality to offer, wish me luck!
 - added beats and instruments variable to build upon in future
 - used beats and instruments variables to aid in building correct number of pads vertically and horizontally
 - added grid to spacially define non functional pads
+- added mouse button down event to allow users to select the pads
+- styled the pads to change colors when clicked
 
 
 ## Created By:

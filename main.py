@@ -9,6 +9,8 @@ HEIGHT = 800
 black = (0, 0, 0)
 white =(255, 255, 255)
 gray =(128, 128, 128)
+green = (0, 255, 0)
+gold = (212, 175, 55)
 
 screen = pygame.display.set_mode([WIDTH, HEIGHT])
 pygame.display.set_caption('TR-808')
@@ -18,11 +20,13 @@ FPS = 60
 TIMER = pygame.time.Clock()
 beats = 8
 instruments = 6
+pads = []
+clicked = [[-1 for _ in range(beats)] for _ in range(instruments)]
 
 # for i in range(instruments):
 #     spacing = (i * 100) + 34
 
-def draw_grid():
+def draw_grid(clicks):
     left_menu = pygame.draw.rect(screen, gray, [0, 0, 200, HEIGHT - 198], 2)
     lower_menu = pygame.draw.rect(screen, gray, [0, HEIGHT - 200, WIDTH, 200], 2)
     pads = []
@@ -46,19 +50,40 @@ def draw_grid():
 
     for beat in range(beats):
         for inst in range(instruments):
-            rect = pygame.draw.rect(screen, gray, [beat * ((WIDTH - 198) // beats) + 198, ((inst * 100) + 1),
+            if clicks[inst][beat] == -1:
+                color = gray
+            else:
+                color = green
+
+            rect = pygame.draw.rect(screen, color, [beat * ((WIDTH - 198) // beats) + 198, ((inst * 100)),
+                                     ((WIDTH - 198) // beats), ((HEIGHT - 198) // instruments)], 0, 2)
+
+            rect = pygame.draw.rect(screen, gold, [beat * ((WIDTH - 198) // beats) + 198, ((inst * 100) + 1),
+                                     ((WIDTH - 198) // beats), ((HEIGHT - 198) // instruments)], 2, 2)
+
+            rect = pygame.draw.rect(screen, black, [beat * ((WIDTH - 198) // beats) + 198, ((inst * 100) + 1),
                                      ((WIDTH - 198) // beats), ((HEIGHT - 198) // instruments)], 1, 2)
+
+            pads.append((rect, (beat, inst)))
+    return pads
+
 
 run = True
 while run:
     TIMER.tick(FPS)
     screen.fill(black)
-    draw_grid()
+    pads = draw_grid(clicked)
 
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            for pad in range(len(pads)):
+                if pads[pad][0].collidepoint(event.pos):
+                    coords = pads[pad][1]
+                    clicked[coords[1]][coords[0]] *= -1
 
     pygame.display.flip()
 
