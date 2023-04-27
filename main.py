@@ -9,6 +9,7 @@ HEIGHT = 800
 black = (0, 0, 0)
 white =(255, 255, 255)
 gray =(128, 128, 128)
+dark_gray = (50, 50, 50)
 green = (0, 255, 0)
 gold = (212, 175, 55)
 blue = (0, 255, 255)
@@ -16,6 +17,7 @@ blue = (0, 255, 255)
 screen = pygame.display.set_mode([WIDTH, HEIGHT])
 pygame.display.set_caption('TR-808')
 label_font = pygame.font.Font('freesansbold.ttf', 32)
+medium_font = pygame.font.Font('freesansbold.ttf', 24)
 
 FPS = 60
 TIMER = pygame.time.Clock()
@@ -108,6 +110,23 @@ while run:
     TIMER.tick(FPS)
     screen.fill(black)
     pads = draw_grid(clicked, active_beat)
+
+    # lower menu
+    # play pause button
+    play_pause = pygame.draw.rect(screen, gray, [50, HEIGHT - 150, 200, 100], 0, 5)
+
+    if playing:
+        play_text = label_font.render('Pause', True, dark_gray)
+        screen.blit(play_text, (100, HEIGHT - 115))
+    else:
+        play_text = label_font.render('Play', True, dark_gray)
+        screen.blit(play_text, (111, HEIGHT - 115))
+
+    # bpm buttons
+
+
+
+
     if beat_changed:
         play_notes()
         beat_changed = False
@@ -121,6 +140,13 @@ while run:
                 if pads[pad][0].collidepoint(event.pos):
                     coords = pads[pad][1]
                     clicked[coords[1]][coords[0]] *= -1
+
+        if event.type == pygame.MOUSEBUTTONUP:
+            if play_pause.collidepoint(event.pos):
+                if playing:
+                    playing = False
+                elif not playing:
+                    playing = True
 
     beat_length = (FPS * 60) // bpm
 

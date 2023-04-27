@@ -40,6 +40,9 @@ pygame seems like it has alot of functionality to offer, wish me luck!
 - added play notes function
 - passed play notes function to run while loop
 
+- added play/pause button
+- added play/pause functionality
+
 
 ## Created By:
 |Name|Email|GitHub|
