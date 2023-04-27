@@ -72,7 +72,7 @@ def draw_grid(clicks, active_beat):
 
             pads.append((rect, (beat, inst)))
 
-        active = pygame.draw.rect(screen, blue, [active_beat * ((WIDTH - 200)// beats) + 200, 0, ((WIDTH - 200)// beats), instruments * 100], 2, 3)
+        active = pygame.draw.rect(screen, blue, [1 * ((WIDTH - 200)// beats) + 198, 0, ((WIDTH - 200)// beats), instruments * 100], 2, 3)
     return pads
 
 
