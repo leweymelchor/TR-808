@@ -16,11 +16,15 @@ label_font = pygame.font.Font('freesansbold.ttf', 32)
 
 FPS = 60
 TIMER = pygame.time.Clock()
+beats = 8
+instruments = 6
 
+# for i in range(instruments):
+#     spacing = (i * 100) + 34
 
 def draw_grid():
-    left_menu = pygame.draw.rect(screen, gray, [0, 0, 200, HEIGHT - 195], 5)
-    lower_menu = pygame.draw.rect(screen, gray, [0, HEIGHT - 200, WIDTH, 200], 5)
+    left_menu = pygame.draw.rect(screen, gray, [0, 0, 200, HEIGHT - 198], 2)
+    lower_menu = pygame.draw.rect(screen, gray, [0, HEIGHT - 200, WIDTH, 200], 2)
     pads = []
     colors = [gray, white, gray]
     kick_text = label_font.render("Kick", True, white)
@@ -30,12 +34,20 @@ def draw_grid():
     hi_hat_text = label_font.render("Hi-hat", True, white)
     crash_text = label_font.render("Crash", True, white)
 
-    screen.blit(kick_text, (30, 30))
-    screen.blit(sub_text, (30, 130))
-    screen.blit(snare_text, (30, 230))
-    screen.blit(clap_text, (30, 330))
-    screen.blit(hi_hat_text, (30, 430))
-    screen.blit(crash_text, (30, 530))
+    screen.blit(kick_text, (52, 34))
+    screen.blit(sub_text, (52, 134))
+    screen.blit(snare_text, (52, 234))
+    screen.blit(clap_text, (52, 334))
+    screen.blit(hi_hat_text, (52, 434))
+    screen.blit(crash_text, (52, 534))
+
+    for i in range(instruments):
+        pygame.draw.line(screen, gray, (0, (i * 100) + 100), (198, (i * 100) + 100), 2)
+
+    for i in range(beats):
+        for j in range(instruments):
+            rect = pygame.draw.rect(screen, gray, [i * ((WIDTH - 198) // beats) + 198, (j * 100),
+                                     ((WIDTH - 198) // beats), ((HEIGHT - 198) // instruments)], 1, 2)
 
 run = True
 while run:
