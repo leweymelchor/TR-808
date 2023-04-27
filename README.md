@@ -14,6 +14,9 @@ A fun beat making tool that allows you to input sounds, and create music.
 ## Latest Updates
 - created the main window
 - created the run time parameters
+- created draw grid function to update display
+- added 2 divisions, one for instrument text, and one to house the lower menu
+- added text to the screen
 
 ## Created By:
 |Name|Email|GitHub|
