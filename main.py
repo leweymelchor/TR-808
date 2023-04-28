@@ -142,6 +142,20 @@ while run:
     sub_text = medium_font.render('-5', True, white)
     screen.blit(add_text, (570, HEIGHT - 140))
     screen.blit(sub_text, (570, HEIGHT - 90))
+    # Time Signature
+    timesig_rect = pygame.draw.rect(screen, gray, [650, HEIGHT - 150, 200, 100], 2, 5)
+    timesig_text = label_font.render('Time Sig.', True, white)
+    screen.blit(timesig_text, ( 678, HEIGHT - 136))
+    timesig_text2 = label_font.render(f'{beats}', True, white)
+    screen.blit(timesig_text2, ( 740, HEIGHT - 96))
+
+    timesig_add_rect1 = pygame.draw.rect(screen, gray, [860, HEIGHT - 150, 48, 48], 0, 5)
+    timesig_sub_rect1 = pygame.draw.rect(screen, gray, [860, HEIGHT - 100, 48, 48], 0, 5)
+    timesig_add_text = medium_font.render('+1', True, white)
+    timesig_sub_text = medium_font.render('-1', True, white)
+    screen.blit(timesig_add_text, (870, HEIGHT - 140))
+    screen.blit(timesig_sub_text, (870, HEIGHT - 90))
+
 
 
     if beat_changed:
@@ -173,6 +187,14 @@ while run:
                 bpm += 10
             elif bpm_sub_rect5.collidepoint(event.pos):
                 bpm -= 10
+            elif timesig_add_rect1.collidepoint(event.pos):
+                beats += 1
+                for i in range(len(clicked)):
+                    clicked[i].append(-1)
+            elif timesig_sub_rect1.collidepoint(event.pos):
+                beats -= 1
+                for i in range(len(clicked)):
+                    clicked[i].pop(-1)
 
     beat_length = (FPS * 60) // bpm
 

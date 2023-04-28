@@ -47,6 +47,10 @@ pygame seems like it has alot of functionality to offer, wish me luck!
 - added bpm +1, -1, +5, -5 buttons
 - added functionality logic in the while loop
 
+- you can now change the beats per measure
+- added time signature view
+- added + and - options to adjust the number of beats in your loop
+
 
 ## Created By:
 |Name|Email|GitHub|
