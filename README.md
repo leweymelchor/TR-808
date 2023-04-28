@@ -51,6 +51,11 @@ pygame seems like it has alot of functionality to offer, wish me luck!
 - added time signature view
 - added + and - options to adjust the number of beats in your loop
 
+- created mute toggle for each instrument
+- updated colors based on instrument toggle if muted channel is gray if active channel is green
+- passed new variable to draw grid function to help with toggleing colors
+- implemented instrument mute toggle logic in run while loop
+
 
 ## Created By:
 |Name|Email|GitHub|
