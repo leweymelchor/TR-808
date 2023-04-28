@@ -43,6 +43,10 @@ pygame seems like it has alot of functionality to offer, wish me luck!
 - added play/pause button
 - added play/pause functionality
 
+- added bpm adjustment options
+- added bpm +1, -1, +5, -5 buttons
+- added functionality logic in the while loop
+
 
 ## Created By:
 |Name|Email|GitHub|

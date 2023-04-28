@@ -123,8 +123,25 @@ while run:
         screen.blit(play_text, (111, HEIGHT - 115))
 
     # bpm buttons
+    bpm_rect = pygame.draw.rect(screen, gray, [300, HEIGHT - 150, 200, 100], 2, 5)
+    bpm_text = label_font.render('BPM', True, white)
+    screen.blit(bpm_text, ( 360, HEIGHT - 136))
+    bpm_text2 = label_font.render(f'{bpm // 2}', True, white)
+    screen.blit(bpm_text2, ( 367, HEIGHT - 96))
 
+    bpm_add_rect1 = pygame.draw.rect(screen, gray, [510, HEIGHT - 150, 48, 48], 0, 5)
+    bpm_sub_rect1 = pygame.draw.rect(screen, gray, [510, HEIGHT - 100, 48, 48], 0, 5)
+    add_text = medium_font.render('+1', True, white)
+    sub_text = medium_font.render('-1', True, white)
+    screen.blit(add_text, (520, HEIGHT - 140))
+    screen.blit(sub_text, (520, HEIGHT - 90))
 
+    bpm_add_rect5 = pygame.draw.rect(screen, gray, [560, HEIGHT - 150, 48, 48], 0, 5)
+    bpm_sub_rect5 = pygame.draw.rect(screen, gray, [560, HEIGHT - 100, 48, 48], 0, 5)
+    add_text = medium_font.render('+5', True, white)
+    sub_text = medium_font.render('-5', True, white)
+    screen.blit(add_text, (570, HEIGHT - 140))
+    screen.blit(sub_text, (570, HEIGHT - 90))
 
 
     if beat_changed:
@@ -147,6 +164,15 @@ while run:
                     playing = False
                 elif not playing:
                     playing = True
+
+            if bpm_add_rect1.collidepoint(event.pos):
+                bpm += 2
+            elif bpm_sub_rect1.collidepoint(event.pos):
+                bpm -= 2
+            elif bpm_add_rect5.collidepoint(event.pos):
+                bpm += 10
+            elif bpm_sub_rect5.collidepoint(event.pos):
+                bpm -= 10
 
     beat_length = (FPS * 60) // bpm
 
