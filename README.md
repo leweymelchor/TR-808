@@ -59,6 +59,8 @@ pygame seems like it has alot of functionality to offer, wish me luck!
 - added clear pads button and function to reset all pads
 - added load and save buttons and function to open up menu
 - created file to save beats into and load beats from
+- updated save/load button pause the beat
+
 
 
 ## Created By:
