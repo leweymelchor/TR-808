@@ -209,8 +209,10 @@ while run:
 
     if save_menu:
         exit_button = draw_save_menu()
+        playing = False
     if load_menu:
         exit_button = draw_load_menu()
+        playing = False
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
