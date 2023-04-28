@@ -61,6 +61,12 @@ pygame seems like it has alot of functionality to offer, wish me luck!
 - created file to save beats into and load beats from
 - updated save/load button pause the beat
 
+- building save menu
+- added buttons
+- added ability to enter text for a beat you want to save
+- added typing indicator
+- added save functionailty to the saved_beats.txt by utilizing a dictionary and a matrix
+
 
 
 ## Created By:
