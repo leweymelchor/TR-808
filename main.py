@@ -3,9 +3,16 @@ from pygame import mixer
 
 pygame.init()
 
+# Screen
 WIDTH = 1400
 HEIGHT = 800
 
+screen = pygame.display.set_mode([WIDTH, HEIGHT])
+pygame.display.set_caption('TR-808')
+label_font = pygame.font.Font('freesansbold.ttf', 32)
+medium_font = pygame.font.Font('freesansbold.ttf', 24)
+
+# Colors
 black = (0, 0, 0)
 white =(255, 255, 255)
 gray =(128, 128, 128)
@@ -14,11 +21,9 @@ green = (0, 255, 0)
 gold = (212, 175, 55)
 blue = (0, 255, 255)
 
-screen = pygame.display.set_mode([WIDTH, HEIGHT])
-pygame.display.set_caption('TR-808')
-label_font = pygame.font.Font('freesansbold.ttf', 32)
-medium_font = pygame.font.Font('freesansbold.ttf', 24)
 
+
+# Starting variables
 FPS = 60
 TIMER = pygame.time.Clock()
 beats = 8
@@ -31,7 +36,12 @@ playing = True
 active_length = 0
 active_beat = 0
 beat_changed = True
-pygame.mixer.set_num_channels(instruments * 3)
+save_menu = False
+load_menu = False
+saved_beats = []
+file = open('saved_beats.txt', 'r')
+for line in file:
+    saved_beats.append(line)
 
 # sounds
 kick =mixer.Sound('media/TR-808 sounds/Kick.wav')
@@ -40,7 +50,7 @@ snare =mixer.Sound('media/TR-808 sounds/Snare 1.wav')
 clap =mixer.Sound('media/TR-808 sounds/Clap 1.wav')
 hi_hat =mixer.Sound('media/TR-808 sounds/Closed Hat 1.wav')
 crash =mixer.Sound('media/TR-808 sounds/Cymbal.wav')
-
+pygame.mixer.set_num_channels(instruments * 3)
 
 def play_notes():
     for pad in range(len(clicked)):
@@ -108,11 +118,25 @@ def draw_grid(clicks, active_beat, active_channels):
         active = pygame.draw.rect(screen, blue, [active_beat * ((WIDTH - 200)// beats) + 198, 0, ((WIDTH - 200)// beats), instruments * 100], 2, 3)
     return pads
 
+def draw_save_menu():
+    pygame.draw.rect(screen, black, [0, 0, WIDTH, HEIGHT])
+    exit_btn = pygame.draw.rect(screen, gray, [1280, HEIGHT - 140, 100, 90], 0, 5)
+    exit_text = label_font.render('Close', True, white)
+    screen.blit(exit_text, (1285, HEIGHT - 110))
+    return exit_btn
+
+def draw_load_menu():
+    pygame.draw.rect(screen, black, [0, 0, WIDTH, HEIGHT])
+    exit_btn = pygame.draw.rect(screen, gray, [1280, HEIGHT - 140, 100, 90], 0, 5)
+    exit_text = label_font.render('Close', True, white)
+    screen.blit(exit_text, (1285, HEIGHT - 110))
+    return exit_btn
 
 run = True
 while run:
     TIMER.tick(FPS)
     screen.fill(black)
+
     pads = draw_grid(clicked, active_beat, active_channels)
 
     # lower menu
@@ -166,22 +190,39 @@ while run:
         rect = pygame.rect.Rect((0, inst * 100), (198, 100))
         instrument_rects.append(rect)
 
+    # Save and load patterns
+    save_button = pygame.draw.rect(screen, gray, [950, HEIGHT - 150, 120, 48], 0, 5)
+    load_button = pygame.draw.rect(screen, gray, [950, HEIGHT - 100, 120, 48], 0, 5)
+    save_text = label_font.render('Save', True, white)
+    load_text = label_font.render('Load', True, white)
+    screen.blit(save_text, (970, HEIGHT - 140))
+    screen.blit(load_text, (970, HEIGHT - 90))
+
+    # clear pads
+    clear_pads = pygame.draw.rect(screen, gray, [1110, HEIGHT - 100, 120, 48], 0, 5)
+    clear_text = label_font.render('Clear', True, white)
+    screen.blit(clear_text, (1125, HEIGHT - 90))
 
     if beat_changed:
         play_notes()
         beat_changed = False
 
+    if save_menu:
+        exit_button = draw_save_menu()
+    if load_menu:
+        exit_button = draw_load_menu()
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
 
-        if event.type == pygame.MOUSEBUTTONDOWN:
+        if event.type == pygame.MOUSEBUTTONDOWN and not save_menu and not load_menu:
             for pad in range(len(pads)):
                 if pads[pad][0].collidepoint(event.pos):
                     coords = pads[pad][1]
                     clicked[coords[1]][coords[0]] *= -1
 
-        if event.type == pygame.MOUSEBUTTONUP:
+        if event.type == pygame.MOUSEBUTTONUP and not save_menu and not load_menu:
             if play_pause.collidepoint(event.pos):
                 if playing:
                     playing = False
@@ -204,10 +245,23 @@ while run:
                 beats -= 1
                 for i in range(len(clicked)):
                     clicked[i].pop(-1)
+            elif clear_pads.collidepoint(event.pos):
+                clicked = [[-1 for _ in range(beats)] for _ in range(instruments)]
+
+            elif save_button.collidepoint(event.pos):
+                save_menu = True
+            elif load_button.collidepoint(event.pos):
+                load_menu = True
 
             for inst in range(len(instrument_rects)):
                 if instrument_rects[inst].collidepoint(event.pos):
                     active_channels[inst] *= -1
+
+        elif event.type == pygame.MOUSEBUTTONUP:
+            if exit_button.collidepoint(event.pos):
+                save_menu = False
+                load_menu = False
+                playing = True
 
     beat_length = (FPS * 60) // bpm
 

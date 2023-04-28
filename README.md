@@ -56,6 +56,10 @@ pygame seems like it has alot of functionality to offer, wish me luck!
 - passed new variable to draw grid function to help with toggleing colors
 - implemented instrument mute toggle logic in run while loop
 
+- added clear pads button and function to reset all pads
+- added load and save buttons and function to open up menu
+- created file to save beats into and load beats from
+
 
 ## Created By:
 |Name|Email|GitHub|
