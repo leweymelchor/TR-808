@@ -7,6 +7,8 @@ A fun beat making tool that allows you to input sounds, and create music.
 I want to learn more about python and other packages such as pygame, by building a playable drum machine.
 pygame seems like it has alot of functionality to offer, wish me luck!
 
+https://user-images.githubusercontent.com/102191748/235314554-443aa2de-add0-49df-a079-97bc710b8f22.mp4
+
 ## Start it up
 - open up terminal at file directory
 - activate the virtual enviornment
