@@ -22,8 +22,6 @@ green = (0, 255, 0)
 gold = (212, 175, 55)
 blue = (0, 255, 255)
 
-
-
 # Starting variables
 FPS = 60
 TIMER = pygame.time.Clock()
@@ -48,7 +46,6 @@ for line in file:
 beat_name = ''
 typing = False
 
-
 # sounds
 kick =mixer.Sound('media/TR-808 sounds/Kick.wav')
 sub =mixer.Sound('media/TR-808 sounds/808 Sub.wav')
@@ -57,6 +54,7 @@ clap =mixer.Sound('media/TR-808 sounds/Clap 1.wav')
 hi_hat =mixer.Sound('media/TR-808 sounds/Closed Hat 1.wav')
 crash =mixer.Sound('media/TR-808 sounds/Cymbal.wav')
 pygame.mixer.set_num_channels(instruments * 3)
+
 
 def play_notes():
     for pad in range(len(clicked)):
@@ -74,9 +72,6 @@ def play_notes():
             if pad == 5:
                 crash.play()
 
-
-# for i in range(instruments):
-#     spacing = (i * 100) + 34
 
 def draw_grid(clicks, active_beat, active_channels):
     left_menu = pygame.draw.rect(screen, gray, [0, 0, 200, HEIGHT - 198], 2)
@@ -124,6 +119,7 @@ def draw_grid(clicks, active_beat, active_channels):
         active = pygame.draw.rect(screen, blue, [active_beat * ((WIDTH - 200)// beats) + 198, 0, ((WIDTH - 200)// beats), instruments * 100], 2, 3)
     return pads
 
+
 def draw_save_menu(beat_name, typing):
     pygame.draw.rect(screen, black, [0, 0, WIDTH, HEIGHT])
     menu_text = label_font.render('Save Menu: Enter a name', True, white)
@@ -143,6 +139,7 @@ def draw_save_menu(beat_name, typing):
     screen.blit(exit_text, (1285, HEIGHT - 110))
 
     return exit_btn, saving_btn, entry_rect
+
 
 def draw_load_menu(index):
     loaded_clicked = 0
@@ -343,6 +340,7 @@ while run:
                         load_menu = False
                         playing = True
                         active_beat = -1
+
             if save_menu:
                 if entry_rect.collidepoint(event.pos):
                     if typing:
@@ -358,7 +356,6 @@ while run:
                     save_menu = False
                     typing = False
                     beat_name = ''
-
 
         if event.type == pygame.TEXTINPUT and typing:
             beat_name += event.text
