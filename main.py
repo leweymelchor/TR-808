@@ -289,6 +289,7 @@ while run:
                     playing = False
                 elif not playing:
                     playing = True
+                    active_beat = -1
 
             if bpm_add_rect1.collidepoint(event.pos):
                 bpm += 2
@@ -331,6 +332,13 @@ while run:
                 elif delete_btn.collidepoint(event.pos):
                     if 0 <= index < len(saved_beats):
                         saved_beats.pop(index)
+                        # with open("saved_beats.txt", "r") as f:
+                        #     saved_beats = f.readlines()
+                        # with open("saved_beats.txt", "w") as f:
+                        #     for beat in saved_beats:
+                        #         if beat.strip("\n") != int(f'{saved_beats[beat]}'):
+                        #             f.write(beat)
+                        # here here here here here
                 elif load_button.collidepoint(event.pos):
                     if 0 <= index < len(saved_beats):
                         beats = loaded_info[0]
