@@ -76,6 +76,8 @@ pygame seems like it has alot of functionality to offer, wish me luck!
 - created highlight for selected beat to load
 - made load and delete buttons in load menu, functional
 
+- bug fix: blue highlight started before the first beat
+
 
 
 ## Created By:
