@@ -67,6 +67,15 @@ pygame seems like it has alot of functionality to offer, wish me luck!
 - added typing indicator
 - added save functionailty to the saved_beats.txt by utilizing a dictionary and a matrix
 
+- building load menu
+- created load beats outline
+- created delete and load buttons
+- fixed close error
+- added saved beats to load screen by parsing the data in saved_beats.txt
+- used string manipulation to extract the data to load
+- created highlight for selected beat to load
+- made load and delete buttons in load menu, functional
+
 
 
 ## Created By:
